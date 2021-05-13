@@ -23,7 +23,9 @@ function getContactById(contactId) {
     }
 
     const data = JSON.parse(content);
-    const contact = data.find((el) => el.id === contactId);
+    const contact = data.find((el) => {
+      return el.id === contactId;
+    });
 
     console.table(contact);
   });
@@ -37,7 +39,7 @@ function removeContact(contactId) {
 
     const data = JSON.parse(content);
     data.filter((el) => {
-      el.id !== contactId;
+      return el.id !== contactId;
     });
     const contact = JSON.stringify(data);
 
