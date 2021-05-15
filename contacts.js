@@ -36,22 +36,26 @@ function getContactById(contactId) {
 }
 
 function removeContact(contactId) {
+  let data;
+
   fs.readFile(contactsPath, (err, content) => {
     if (err) {
       throw err;
     }
 
-    const data = JSON.parse(content);
+    data = JSON.parse(content);
 
-    data.filter((el) => String(el.id) !== String(contactId));
+    const contactFilter = data.filter(
+      (el) => String(el.id) !== String(contactId)
+    );
 
-    const contact = JSON.stringify(data);
+    const contacts = JSON.stringify(contactFilter);
 
-    fs.writeFile(contactsPath, contact, (err) => {
+    fs.writeFile(contactsPath, contacts, (err) => {
       if (err) {
         throw err;
       }
-      console.table(JSON.parse(contact));
+      console.table(JSON.parse(contacts));
     });
   });
 }
